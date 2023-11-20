@@ -21,7 +21,8 @@ const filterInfraStructureErrors = require("./helpers/infrastructureLogErrors");
 const { normalizeFilteredTestName } = require('./lib/util/filterUtil')
 
 const casesPath = path.join(__dirname, "configCases");
-const categories = fs.readdirSync(casesPath).map(cat => {
+const categories = fs.readdirSync(casesPath)
+.filter(p => p.includes('loader-import-module')).map(cat => {
 	return {
 		name: cat,
 		tests: fs

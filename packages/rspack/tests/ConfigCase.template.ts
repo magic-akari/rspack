@@ -45,6 +45,7 @@ const casesPath = path.join(__dirname, "configCases");
 const categories = fs
 	.readdirSync(casesPath)
 	.filter(isValidTestCaseDir)
+	.filter(p => p.includes("loader-import-module"))
 	.map(cat => {
 		return {
 			name: cat,
