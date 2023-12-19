@@ -23,6 +23,7 @@ pub use import_scripts_chunk_loading::ImportScriptsChunkLoadingPlugin;
 mod runtime_module;
 pub use runtime_module::{
   chunk_has_css, is_enabled_for_chunk, render_condition_map, stringify_chunks, BooleanMatcher,
+  GetChunkFilenameRuntimeModule,
 };
 mod startup_chunk_dependencies;
 pub use startup_chunk_dependencies::StartupChunkDependenciesPlugin;

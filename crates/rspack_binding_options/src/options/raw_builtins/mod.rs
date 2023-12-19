@@ -1,6 +1,7 @@
 mod raw_banner;
 mod raw_bundle_info;
 mod raw_copy;
+mod raw_css_extract;
 mod raw_html;
 mod raw_limit_chunk_count;
 mod raw_mf;
@@ -70,6 +71,7 @@ pub use self::{
 };
 use self::{
   raw_bundle_info::{RawBundlerInfoModeWrapper, RawBundlerInfoPluginOptions},
+  raw_css_extract::RawCssExtractPluginOption,
   raw_mf::{RawConsumeSharedPluginOptions, RawContainerReferencePluginOptions, RawProvideOptions},
 };
 use crate::{
@@ -137,6 +139,7 @@ pub enum BuiltinPluginName {
   SwcJsMinimizerRspackPlugin,
   SwcCssMinimizerRspackPlugin,
   BundlerInfoPlugin,
+  CssExtractPlugin,
 }
 
 #[napi(object)]
@@ -378,6 +381,13 @@ impl BuiltinPlugin {
           )
           .boxed(),
         )
+      }
+      BuiltinPluginName::CssExtractPlugin => {
+        let plugin = rspack_plugin_extract_css::plugin::PluginCssExtract::new(
+          downcast_into::<RawCssExtractPluginOption>(self.options)?.into(),
+        )
+        .boxed();
+        plugins.push(plugin);
       }
     }
     Ok(())

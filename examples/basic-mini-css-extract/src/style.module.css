@@ -1,0 +1,7 @@
+@import url("./other.css");
+
+.btn {
+	border-radius: 5px;
+	color: rgb(109, 109, 109);
+	box-shadow: 0 0 20px rgba(117, 117, 117, 0.1);
+}

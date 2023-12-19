@@ -623,8 +623,7 @@ pub type BoxedParserAndGeneratorBuilder =
 
 #[derive(Default)]
 pub struct ApplyContext {
-  pub(crate) registered_parser_and_generator_builder:
-    DashMap<ModuleType, BoxedParserAndGeneratorBuilder>,
+  pub registered_parser_and_generator_builder: DashMap<ModuleType, BoxedParserAndGeneratorBuilder>,
 }
 
 impl ApplyContext {
