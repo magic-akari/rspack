@@ -214,6 +214,7 @@ impl Compilation {
             }
             res
           });
+        result.id = id;
 
         result.id = id;
 

@@ -26,8 +26,8 @@ export class MiniCssExtractPlugin {
 
 	options: PluginOptions;
 
-	constructor(options: PluginOptions) {
-		this.options = options;
+	constructor(options?: PluginOptions) {
+		this.options = options || {};
 	}
 
 	apply(compiler: Compiler) {

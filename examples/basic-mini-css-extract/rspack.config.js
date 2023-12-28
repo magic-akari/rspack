@@ -20,7 +20,8 @@ const config = {
 	},
 	optimization: {
 		moduleIds: "named",
-		runtimeChunk: true
+		runtimeChunk: true,
+		minimize: false
 	},
 	experiments: {
 		css: false,

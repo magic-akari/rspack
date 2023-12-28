@@ -12,6 +12,10 @@ const config = {
 	transform: {
 		"^.+\\.(t|j)sx?$": "@swc/jest"
 	},
+	snapshotFormat: {
+		escapeString: true, // jest breaking change. mini-css-extract using old jest that default escape string
+		printBasicPrototype: true
+	},
 	globals: {
 		"ts-jest": {
 			tsconfig: "<rootDir>/tests/tsconfig.json"
