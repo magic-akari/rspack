@@ -14,6 +14,7 @@ use rspack_core::{
   ModuleRuleUseLoader, ModuleType, ParserOptions, ParserOptionsByModuleType,
 };
 use rspack_error::{error, miette::IntoDiagnostic};
+use rspack_loader_preact_refresh::PREACT_REFRESH_LOADER_IDENTIFIER;
 use rspack_loader_react_refresh::REACT_REFRESH_LOADER_IDENTIFIER;
 use rspack_loader_swc::SWC_LOADER_IDENTIFIER;
 use rspack_napi_shared::threadsafe_function::{ThreadsafeFunction, ThreadsafeFunctionCallMode};
@@ -38,6 +39,11 @@ pub fn get_builtin_loader(builtin: &str, options: Option<&str>) -> BoxLoader {
   if builtin.starts_with(REACT_REFRESH_LOADER_IDENTIFIER) {
     return Arc::new(
       rspack_loader_react_refresh::ReactRefreshLoader::default().with_identifier(builtin.into()),
+    );
+  }
+  if builtin.starts_with(PREACT_REFRESH_LOADER_IDENTIFIER) {
+    return Arc::new(
+      rspack_loader_preact_refresh::PreactRefreshLoader::default().with_identifier(builtin.into()),
     );
   }
 
