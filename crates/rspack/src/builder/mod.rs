@@ -3697,6 +3697,10 @@ pub struct ExperimentsBuilder {
   css: Option<bool>,
   /// Whether to enable async web assembly.
   async_web_assembly: Option<bool>,
+  /// Whether to enable defer import.
+  defer_import: Option<bool>,
+  /// Whether to enable source import.
+  source_import: Option<bool>,
   // TODO: lazy compilation
   pure_functions: Option<bool>,
 }
@@ -3707,6 +3711,8 @@ impl From<Experiments> for ExperimentsBuilder {
       future_defaults: None,
       css: Some(value.css),
       async_web_assembly: None,
+      defer_import: Some(value.defer_import),
+      source_import: Some(value.source_import),
       pure_functions: Some(value.pure_functions),
     }
   }
@@ -3718,6 +3724,8 @@ impl From<&mut ExperimentsBuilder> for ExperimentsBuilder {
       future_defaults: value.future_defaults.take(),
       css: value.css.take(),
       async_web_assembly: value.async_web_assembly.take(),
+      defer_import: value.defer_import.take(),
+      source_import: value.source_import.take(),
       pure_functions: value.pure_functions.take(),
     }
   }
@@ -3742,6 +3750,18 @@ impl ExperimentsBuilder {
     self
   }
 
+  /// Set whether to enable defer import.
+  pub fn defer_import(&mut self, defer_import: bool) -> &mut Self {
+    self.defer_import = Some(defer_import);
+    self
+  }
+
+  /// Set whether to enable source import.
+  pub fn source_import(&mut self, source_import: bool) -> &mut Self {
+    self.source_import = Some(source_import);
+    self
+  }
+
   /// Build [`Experiments`] from options.
   ///
   /// [`Experiments`]: rspack_core::options::Experiments
@@ -3758,8 +3778,8 @@ impl ExperimentsBuilder {
 
     Ok(Experiments {
       css: d!(self.css, false),
-      defer_import: false,
-      source_import: false,
+      defer_import: d!(self.defer_import, false),
+      source_import: d!(self.source_import, false),
       pure_functions: d!(self.pure_functions, false),
     })
   }
